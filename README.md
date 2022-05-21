@@ -1,18 +1,91 @@
 # f_swiper
+![](https://github.com/fangjunai/f_swiper/blob/master/example/screenshot.gif)
 
-A new Flutter plugin project.
+### Installation
+Add
+```bash
+flutter pub add f_swiper
+```
+to your `pubspec.yaml`, and run
+```bash
+flutter packages get
+```
 
-## Getting Started
+### Basic Usage
+```
+ List<Map<String, Function>> list = [
+    {
+      "https://s.alicdn.com/@img/imgextra/i2/O1CN01aBX2LK1urj81SOFzR_!!6000000006091-2-tps-968-230.png":
+          () => {}
+    },
+    {
+      "https://s.alicdn.com/@img/imgextra/i3/O1CN012JlDJ41PV3UMIeqjA_!!6000000001845-2-tps-968-230.png":
+          () => print("onTap => Picture2")
+    },
+    {
+      "https://s.alicdn.com/@img/imgextra/i4/O1CN01lQNPo226RsAsyZvwz_!!6000000007659-2-tps-968-230.png":
+          () => print("onTap => Picture3")
+    }
+  ];
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+Container(
+    height: 100,
+    child: FSwiper(list: list),
+),
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
-The plugin project was generated without specifying the `--platforms` flag, no platforms are currently supported.
-To add platforms, run `flutter create -t plugin --platforms <platforms> .` in this directory.
-You can also find a detailed instruction on how to add platforms in the `pubspec.yaml` at https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms.
+# Example
+
+
+```
+import 'package:flutter/material.dart';
+
+import 'package:f_swiper/f_swiper.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  //Picture URL, onTap
+  List<Map<String, Function>> list = [
+    {
+      "https://s.alicdn.com/@img/imgextra/i2/O1CN01aBX2LK1urj81SOFzR_!!6000000006091-2-tps-968-230.png":
+          () => {}
+    },
+    {
+      "https://s.alicdn.com/@img/imgextra/i3/O1CN012JlDJ41PV3UMIeqjA_!!6000000001845-2-tps-968-230.png":
+          () => print("onTap => Picture2")
+    },
+    {
+      "https://s.alicdn.com/@img/imgextra/i4/O1CN01lQNPo226RsAsyZvwz_!!6000000007659-2-tps-968-230.png":
+          () => print("onTap => Picture3")
+    }
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('FSwiper Example App'),
+        ),
+        body: Container(
+          height: 100,
+          child: FSwiper(list: list),
+        ),
+      ),
+    );
+  }
+}
+
+```
+
