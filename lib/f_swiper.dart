@@ -3,22 +3,24 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class FSwiper extends StatefulWidget {
+  final int speed;
   final List<Map<String, Function>> list;
-
-  const FSwiper({Key? key, required this.list}) : super(key: key);
+  const FSwiper({Key? key, required this.list, this.speed = 3})
+      : super(key: key);
 
   @override
   _FSwiperState createState() => _FSwiperState();
 }
 
 class _FSwiperState extends State<FSwiper> with SingleTickerProviderStateMixin {
+  late Timer _timer;
   int _pageIndex = 0;
   TabController? _tabController;
 
   @override
   void initState() {
     _tabController = TabController(length: widget.list.length, vsync: this);
-    Timer.periodic(const Duration(seconds: 3), (timer) {
+    _timer = Timer.periodic(Duration(seconds: widget.speed), (timer) {
       if (_pageIndex < widget.list.length) {
         _tabController?.animateTo(_pageIndex);
         _pageIndex++;
@@ -28,6 +30,12 @@ class _FSwiperState extends State<FSwiper> with SingleTickerProviderStateMixin {
       }
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override
